@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Избранные книги</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    .book { border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin-bottom: 15px; position: relative; }
+    .book.favorited { background: #fffbe6; border-color: #ffc107; }
+    .fav-button {
+      position: absolute; top: 10px; right: 10px; font-size: 18px; background: none;
+      border: none; color: #aaa; cursor: pointer;
+    }
+    .book.favorited .fav-button { color: #e91e63; }
+    input { padding: 10px; width: 100%; margin-bottom: 20px; font-size: 16px; }
+    .export-btn {
+      background: #4CAF50; color: white; border: none;
+      padding: 10px 15px; border-radius: 6px; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Избранные книги</h1>
+  <input type="text" id="searchInput" placeholder="Поиск по книгам...">
+  <div id="bookList"></div>
+  <button class='export-btn' onclick='exportFavorites()'>Скачать избранное</button>
+  <script src="books.js"></script>
+  <script>
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+    function toggleFavorite(btn) {
+      const book = btn.closest('.book');
+      const id = book.dataset.id;
+      const index = favorites.indexOf(id);
+      if (index >= 0) {
+        favorites.splice(index, 1);
+        book.classList.remove('favorited');
+      } else {
+        favorites.push(id);
+        book.classList.add('favorited');
+      }
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      renderBooks();
+    }
+
+    function renderBooks() {
+      const list = document.getElementById('bookList');
+      const filter = document.getElementById('searchInput');
+      list.innerHTML = "";
+      const showBooks = books.filter(b => favorites.includes(b.id));
+      filter.addEventListener('input', () => {
+        const val = filter.value.toLowerCase();
+        document.querySelectorAll('.book').forEach(b => {
+          b.style.display = b.innerText.toLowerCase().includes(val) ? '' : 'none';
+        });
+      });
+      showBooks.forEach(b => {
+        const div = document.createElement('div');
+        div.className = 'book';
+        div.dataset.id = b.id;
+        if (favorites.includes(b.id)) div.classList.add('favorited');
+        div.innerHTML = `
+          <button class='fav-button' onclick='toggleFavorite(this)'>♥</button>
+          <h3>${b.title}</h3>
+          <p><strong>Автор:</strong> ${b.author}</p>
+          <p><strong>Описание:</strong> ${b.description}</p>
+          <p><strong>Цена:</strong> ${b.price} ₽</p>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    
+function exportFavorites() {
+  const favBooks = books.filter(b => favorites.includes(b.id));
+  let csv = 'Название\tАвтор\tОписание\tКатегория\tЦена\n';
+  favBooks.forEach(b => {
+    csv += `${b.title}\t${b.author}\t${b.description}\t${b.category_title}\t${b.price} ₽\n`;
+  });
+  const blob = new Blob([csv], { type: 'text/tab-separated-values' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'избранные_книги.xls';
+  link.click();
+}
+
+
+    document.addEventListener('DOMContentLoaded', renderBooks);
+  </script>
+</body>
+</html>
