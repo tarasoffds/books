@@ -35,3 +35,47 @@ input[type="text"] {
   padding: 1rem;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
 }
+
+
+header {
+  background: rgba(250, 250, 250, 0.9);
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+header a {
+  background-color: #f1f1f1;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+header a:hover {
+  background-color: #ddd;
+  transform: translateY(-1px);
+}
+
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #444;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

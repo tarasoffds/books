@@ -8,10 +8,21 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
+
+<script>
+  if (!localStorage.getItem("accessGranted")) {
+    window.location.href = "index.html";
+  }
+</script>
+
+  <header>
     <a href="cat2.html">Разные темы</a>
     <a href="cat3.html">История и религия</a>
     <a href="favorites.html">Избранное</a>
-  </nav>
+  </header>
+  <main style="text-align:center; margin-top:3rem;">
+    <h1>Добро пожаловать в каталог книг</h1>
+    <p>Выберите раздел в верхнем меню</p>
+  </main>
 </body>
 </html>

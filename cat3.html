@@ -8,10 +8,17 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
+
+<script>
+  if (!localStorage.getItem("accessGranted")) {
+    window.location.href = "index.html";
+  }
+</script>
+
+  <header>
     <a href="menu.html">Меню</a>
     <a href="favorites.html">Избранное</a>
-  </nav>
+  </header>
   <input type="text" id="searchInput" placeholder="Поиск по автору или названию..." />
   <div id="bookList" class="book-list"></div>
   <script src="books.js"></script>
@@ -19,5 +26,39 @@
   <script>
     displayBooks({category: 3});
   </script>
+
+<button id="scrollTopBtn" onclick="scrollToTop()">Наверх</button>
+
+<script>
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTopBtn');
+  if (window.scrollY > 200) {
+    btn.style.display = 'block';
+  } else {
+    btn.style.display = 'none';
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+<button id="scrollTopBtn" onclick="scrollToTop()">Наверх</button>
+
+<script>
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTopBtn');
+  if (window.scrollY > 200) {
+    btn.style.display = 'block';
+  } else {
+    btn.style.display = 'none';
+  }
+});
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
 </body>
 </html>
