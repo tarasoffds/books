@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Каталог книг</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <a href="menu.html">Меню</a>
+    <a href="favorites.html">Избранное</a>
+  </nav>
+  <input type="text" id="searchInput" placeholder="Поиск по автору или названию..." />
+  <div id="bookList" class="book-list"></div>
+  <script src="books.js"></script>
+  <script src="script.js"></script>
+  <script>
+    displayBooks({category: 2});
+  </script>
+</body>
+</html>

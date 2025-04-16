@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Избранное</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <a href="menu.html">Меню</a>
+    <a href="cat2.html">Разные темы</a>
+    <a href="cat3.html">История и религия</a>
+  </nav>
+  <button onclick="exportFavorites()">Экспорт в XLSX</button>
+  <div id="bookList" class="book-list"></div>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/xlsx.mini.min.js"></script>
+  <script src="books.js"></script>
+  <script src="script.js"></script>
+  <script>
+    displayBooks({favoritesOnly: true});
+  </script>
+</body>
+</html>
