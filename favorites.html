@@ -62,5 +62,23 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 </script>
+
+<script>
+  const pageKey = "scroll_" + window.location.pathname;
+
+  // Восстановление позиции
+  window.addEventListener("load", () => {
+    const savedY = localStorage.getItem(pageKey);
+    if (savedY) {
+      window.scrollTo({ top: parseInt(savedY), behavior: "smooth" });
+    }
+  });
+
+  // Сохранение позиции перед уходом
+  window.addEventListener("beforeunload", () => {
+    localStorage.setItem(pageKey, window.scrollY);
+  });
+</script>
+
 </body>
 </html>
